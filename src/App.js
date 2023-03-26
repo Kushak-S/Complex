@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import { Editor, Navbar, Output } from './components/index'
+import { Box } from '@mui/system'
 
-function App() {
+const App = () => {
+  const [program, setProgram] = useState('//Write your code here');
+  const [outputCode,setoutputCode] = useState('');
+
+  const getOutput=(data)=>{
+    setoutputCode(data)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+  <Navbar
+    value={program}
+    onChange={getOutput}
+  />
+  <Box display='flex'>
+  <Editor
+    value={program}
+    onChange={setProgram}
+  />
+  <Output
+    value={outputCode}
+  />
+  </Box>
+  </>
+  )
 }
-
-export default App;
+export default App
